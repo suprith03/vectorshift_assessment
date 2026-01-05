@@ -1,15 +1,31 @@
+:root {
+  --bg: #020617;
+  --panel: #0f172a;
+  --node: #020617;
+  --border: #1e293b;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --accent: #3b82f6;
+}
+
 body {
   margin: 0;
-  background: #020617;
-  color: #e5e7eb;
-  font-family: system-ui;
+  background: radial-gradient(circle at top, #020617, #000);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont;
 }
 
 button {
-  background: #2563eb;
+  background: linear-gradient(180deg, #3b82f6, #2563eb);
   color: white;
   border: none;
   padding: 10px 18px;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 8px 20px rgba(59,130,246,0.3);
+}
+
+button:hover {
+  transform: translateY(-1px);
 }

@@ -11,7 +11,18 @@ export const DraggableNode = ({ type, label }) => {
     <div
       draggable
       onDragStart={onDragStart}
-      style={{ padding: 10, background: '#111827', borderRadius: 6 }}
+      style={{
+        padding: '6px 10px',
+        background: '#020617',
+        border: '1px solid #1e293b',
+        borderRadius: 8,
+        color: '#e5e7eb',
+        fontSize: 12,
+        fontWeight: 500,
+        cursor: 'grab',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.35)',
+        userSelect: 'none'
+      }}
     >
       {label}
     </div>

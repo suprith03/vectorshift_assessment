@@ -1,70 +1,150 @@
-# Getting Started with Create React App
+# VectorShift Frontend Technical Assessment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a simplified pipeline editor inspired by VectorShift.  
+It allows users to visually build a pipeline using different node types, connect them, and validate the pipeline structure using a backend service.
 
-## Available Scripts
+The focus of this project is:
+- Scalable node abstraction
+- Clean and unified UI
+- Dynamic Text node behavior
+- Frontend–backend integration with DAG validation
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Frontend
+- React
+- React Flow
+- Zustand
+- JavaScript
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend
+- Python
+- FastAPI
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Structure
 
-### `npm run build`
+vectorshift_assessment/
+├── backend/
+│ ├── main.py
+│ └── venv/
+├── frontend/
+│ ├── src/
+│ │ ├── nodes/
+│ │ ├── App.js
+│ │ ├── ui.js
+│ │ ├── toolbar.js
+│ │ ├── submit.js
+│ │ └── store.js
+│ ├── package.json
+│ └── node_modules/
+└── README.md
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Setup Instructions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
+Make sure you have the following installed:
+- Node.js (v16+)
+- Python (v3.9+)
+- npm
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Backend Setup (FastAPI)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Navigate to the backend folder:
+   ```bash
+   cd backend
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Activate the virtual environment:
+   ```bash
+   source venv/bin/activate
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Install dependencies (if not already installed):
+   ```bash
+   pip install fastapi uvicorn pydantic
 
-## Learn More
+4. Start the backend server:
+   ```bash
+   uvicorn main:app --reload
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Backend will run at:
+   ```arduino
+   http://localhost:8000
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Frontend Setup (React)
 
-### Code Splitting
+1. Open a new terminal and navigate to frontend:
+    ```bash
+    cd frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Install dependencies:
+    ```bash
+    npm install
 
-### Analyzing the Bundle Size
+3. Start the frontend:
+    ```bash
+    npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+Frontend will run at:
+    ```arduino
+    http://localhost:3000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+How to Use the App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. Drag nodes from the toolbar onto the canvas.
 
-### Deployment
+2. Available node types include:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Input
 
-### `npm run build` fails to minify
+- Text
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- LLM
+
+- Output
+
+- Condition
+
+- Merge
+
+- Delay
+
+- JSON
+
+- Math
+
+3. Connect nodes to form a pipeline.
+
+4. In the Text node, you can define variables using:
+
+    {{variableName}}
+
+
+5. This will dynamically create new input handles.
+
+6. Click the Submit button to validate the pipeline.
+
+Backend Validation Logic
+When you click Submit:
+    - The frontend sends all nodes and edges to the backend.
+    - The backend:
+
+        - Counts the number of nodes
+
+        - Counts the number of edges
+
+        - Checks whether the pipeline is a Directed Acyclic Graph (DAG)
+
+You will see an alert like:
+    ```vbnet
+    Nodes: 5
+    Edges: 4
+    DAG: true

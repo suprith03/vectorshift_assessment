@@ -9,11 +9,23 @@ import { TextNode } from './nodes/TextNode';
 import { LLMNode } from './nodes/LLMNode';
 import { OutputNode } from './nodes/OutputNode';
 
+import { ConditionNode } from './nodes/ConditionNode';
+import { MergeNode } from './nodes/MergeNode';
+import { DelayNode } from './nodes/DelayNode';
+import { JSONNode } from './nodes/JSONNode';
+import { MathNode } from './nodes/MathNode';
+
 const nodeTypes = {
   input: InputNode,
   text: TextNode,
   llm: LLMNode,
-  output: OutputNode
+  output: OutputNode,
+
+  condition: ConditionNode,
+  merge: MergeNode,
+  delay: DelayNode,
+  json: JSONNode,
+  math: MathNode
 };
 
 export const PipelineUI = () => {
@@ -68,7 +80,7 @@ export const PipelineUI = () => {
       style={{
         width: '100%',
         height: '70vh',
-        background: 'radial-gradient(circle at top, #020617, #000)'
+        background: 'radial-gradient(circle at top, #020617, #020617)'
       }}
     >
       <ReactFlow
@@ -82,7 +94,7 @@ export const PipelineUI = () => {
         onDragOver={onDragOver}
         fitView
       >
-        <Background gap={24} color="#1e293b" />
+        <Background gap={24} color="#005cf1ff" />
         <Controls />
         <MiniMap />
       </ReactFlow>

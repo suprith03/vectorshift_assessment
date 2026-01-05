@@ -5,11 +5,13 @@ export const TextNode = ({ id }) => {
   const [text, setText] = useState('');
   const textareaRef = useRef(null);
 
-  const vars = [...new Set(
+  const variableInputs = [...new Set(
     (text.match(/\{\{(\w+)\}\}/g) || []).map(v =>
       v.replace(/[{}]/g, '')
     )
   )];
+
+  const inputs = ['input', ...variableInputs];
 
   useEffect(() => {
     if (!textareaRef.current) return;
@@ -18,12 +20,12 @@ export const TextNode = ({ id }) => {
   }, [text]);
 
   return (
-    <BaseNode id={id} title="Text" inputs={vars} outputs={['out']}>
+    <BaseNode id={id} title="Text" inputs={inputs} outputs={['out']}>
       <textarea
         ref={textareaRef}
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Enter prompt… use {{variables}}"
+        placeholder="Enter text… use {{variables}}"
         style={{
           width: '100%',
           minHeight: 60,
